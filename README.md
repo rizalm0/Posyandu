@@ -276,6 +276,7 @@ If styles or charts are missing after a code change, rebuild with `npm run build
 
 - **`SQLSTATE[HY000] [2002] Connection refused`** — MySQL is not running, or `DB_PORT` does not match the XAMPP MySQL port.
 - **`Vite manifest not found` or an unstyled page** — run `npm install && npm run build`, then reload.
+- **`Composer detected issues ... requires a PHP version ">= 8.4.1"`** — the lockfile was previously resolved with PHP 8.4. It is now pinned to PHP 8.3-compatible dependencies. Run `composer install` again and confirm `php -v` is at least 8.3. Do not run this project with XAMPP's bundled PHP 8.0.
 - **`No application encryption key has been specified`** — run `php artisan key:generate`.
 - **`419 Page Expired` after login** — confirm the `sessions` table exists (`php artisan migrate`) and that cookies are enabled.
 - **Tests fail with a missing SQLite driver** — enable `pdo_sqlite` in the PHP configuration used to run PHPUnit.
