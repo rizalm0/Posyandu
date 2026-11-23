@@ -22,6 +22,12 @@ A mobile-first Laravel application for Posyandu administration and parent access
 - Examination history and immunization history.
 - Child switcher for parents with more than one child.
 
+### REST API server
+- JSON API for **balita**, **orang tua**, and **kader** with full CRUD (`GET`, `POST`, `PUT`/`PATCH`, `DELETE`).
+- Writes go straight to the same MySQL database used by the web application, so every create, update, and delete is reflected in both places.
+- Consistent `{"data": ...}` responses, `422` validation errors with field messages, and `404` for unknown IDs.
+- A separate Laravel client consumes this API. See [REST API](#rest-api) below.
+
 ### Access rules
 - Separate login routes for kader and parents, with a `role` middleware and per-model policies.
 - A parent can have multiple children, and a child can have multiple verified parent accounts.
@@ -157,6 +163,64 @@ Login pages:
 6. Log out, then log in as `rina@example.test` to switch between Aisyah and Bima, view the growth chart, history, and immunization records.
 7. Log in as `siti@example.test` to confirm that an unverified parent–child link grants no access.
 
+## REST API
+
+The web application also exposes a JSON API from the same Laravel project. It operates on the same `posyandu` database, so data created through the API appears in the kader portal and vice versa.
+
+> The API is intentionally unauthenticated for this assignment/demo. Do not expose it publicly. Put it behind authentication, a private network, or an API gateway before production use.
+
+Base URL: `http://127.0.0.1:8000/api`
+
+| Method | Endpoint | Description |
+| --- | --- | --- |
+| `GET` | `/api` | API name, version, and endpoint list |
+| `GET` | `/api/balita` | List all balita |
+| `POST` | `/api/balita` | Create a balita (registration number generated automatically) |
+| `GET` | `/api/balita/{id}` | Show one balita |
+| `PUT`/`PATCH` | `/api/balita/{id}` | Update a balita |
+| `DELETE` | `/api/balita/{id}` | Delete a balita |
+| `GET` | `/api/orang-tua` | List parent accounts |
+| `POST` | `/api/orang-tua` | Create a parent account |
+| `GET` | `/api/orang-tua/{id}` | Show one parent account |
+| `PUT`/`PATCH` | `/api/orang-tua/{id}` | Update a parent account |
+| `DELETE` | `/api/orang-tua/{id}` | Delete a parent account |
+| `GET` | `/api/kader` | List kader accounts |
+| `POST` | `/api/kader` | Create a kader account |
+| `GET` | `/api/kader/{id}` | Show one kader account |
+| `PUT`/`PATCH` | `/api/kader/{id}` | Update a kader account |
+| `DELETE` | `/api/kader/{id}` | Delete a kader account |
+
+### Example: create and delete a balita
+
+```bash
+curl -X POST http://127.0.0.1:8000/api/balita \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json" \
+  -d '{
+    "full_name": "Aisyah Putri",
+    "date_of_birth": "2024-05-12",
+    "gender": "P",
+    "parent_name": "Rina Kartika",
+    "phone": "081200000001",
+    "address": "Jl. Melati No. 8"
+  }'
+
+curl -X DELETE http://127.0.0.1:8000/api/balita/12 \
+  -H "Accept: application/json"
+```
+
+Requirements per resource:
+
+- **Balita**: `full_name`, `date_of_birth`, `gender` (`L`/`P`), `parent_name`; optional `phone`, `address`, `registered_at`, `is_active`.
+- **Orang tua**: `name`, `email`, `password` (min. 8 characters) on create; optional `phone`, `is_active`. Email must be unique. Updates may omit `password`.
+- **Kader**: same fields as orang tua. The server forces `role` to `parent` or `kader` based on the endpoint.
+
+All validation failures return HTTP `422` with an `errors` object. Unknown IDs return HTTP `404`. Passwords are hashed by the `User` model and are never returned by the API.
+
+### Client application
+
+The separate client lives in `C:\Users\HP\Documents\posyandu-client` and runs on <http://127.0.0.1:8001>. It reads and writes all data through this API. See its `README.md` for setup and configuration.
+
 ## Reports
 
 Reports are available at:
@@ -190,9 +254,9 @@ The schema includes `posyandu_id` on the core records so a future multi-Posyandu
 php artisan test
 ```
 
-The suite currently contains **57 tests / 247 assertions**. Tests use an in-memory SQLite database configured in `phpunit.xml`, so they do not modify the MySQL demo database.
+The suite currently contains **78 tests / 336 assertions**. Tests use an in-memory SQLite database configured in `phpunit.xml`, so they do not modify the MySQL demo database.
 
-The tests cover authentication and role redirects, toddler management, examination validation and authorization, immunization updates, parent-account and guardian verification guards, parent access to linked children, report output, and the four examination form states.
+The tests cover authentication and role redirects, toddler management, examination validation and authorization, immunization updates, parent-account and guardian verification guards, parent access to linked children, report output, the four examination form states, and API CRUD for balita, orang tua, and kader — including database persistence, registration-number generation, hashed passwords, `422` validation, and `404` handling.
 
 ## Useful commands
 
@@ -216,7 +280,7 @@ If styles or charts are missing after a code change, rebuild with `npm run build
 - **`419 Page Expired` after login** — confirm the `sessions` table exists (`php artisan migrate`) and that cookies are enabled.
 - **Tests fail with a missing SQLite driver** — enable `pdo_sqlite` in the PHP configuration used to run PHPUnit.
 - **Vite prints a `fontaine` warning** — this is an optional font-fallback optimization and does not prevent assets from being built.
-- **Port 8000 is already in use** — run `php artisan serve --port=8001` and update `APP_URL` if needed.
+- **Port 8000 is already in use** — stop the other process, or run `php artisan serve --port=8002` and update the client's `POSYANDU_API_URL`. Keep the client on a different port (for example `8001`).
 
 ## Scope and limitations
 
