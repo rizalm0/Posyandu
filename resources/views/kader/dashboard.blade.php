@@ -63,31 +63,31 @@
             @endforeach
         </div>
 
-        <div class="mt-3 grid grid-cols-3 gap-2.5 sm:gap-3">
-            <a href="{{ route('kader.balita.index') }}" class="group flex min-h-[68px] flex-col justify-between rounded-2xl bg-brand-500 p-3.5 text-white shadow-[0_12px_26px_-16px_rgba(19,139,104,0.85)] transition hover:bg-brand-600 active:scale-[0.99] sm:flex-row sm:items-center sm:p-4">
-                <span class="flex items-center gap-2 text-[12px] font-semibold sm:text-[13px]">
+        <div class="mt-3 grid grid-cols-1 gap-2.5 min-[360px]:grid-cols-2 sm:grid-cols-3 sm:gap-3">
+            <a href="{{ route('kader.balita.index') }}" class="group flex min-h-[60px] items-center justify-between gap-2 rounded-2xl bg-brand-500 p-3.5 text-white shadow-[0_12px_26px_-16px_rgba(19,139,104,0.85)] transition hover:bg-brand-600 active:scale-[0.99] min-[360px]:col-span-2 sm:col-span-1 sm:min-h-[68px] sm:p-4">
+                <span class="flex min-w-0 items-center gap-2 text-[12px] font-semibold leading-snug sm:text-[13px]">
                     <x-icon name="clipboard" class="size-4.5 shrink-0" />
-                    Catat pemeriksaan
+                    <span class="min-w-0">Catat pemeriksaan</span>
                 </span>
-                <span class="mt-2 flex size-6 items-center justify-center rounded-full bg-white/15 sm:mt-0">
+                <span class="flex size-6 shrink-0 items-center justify-center rounded-full bg-white/15">
                     <x-icon name="arrow-right" class="size-3.5" />
                 </span>
             </a>
-            <a href="{{ route('kader.balita.create') }}" class="group flex min-h-[68px] flex-col justify-between rounded-2xl border border-line bg-white p-3.5 text-ink shadow-card transition hover:border-brand-200 hover:bg-brand-50 active:scale-[0.99] sm:flex-row sm:items-center sm:p-4">
-                <span class="flex items-center gap-2 text-[12px] font-semibold sm:text-[13px]">
+            <a href="{{ route('kader.balita.create') }}" class="group flex min-h-[60px] items-center justify-between gap-2 rounded-2xl border border-line bg-white p-3.5 text-ink shadow-card transition hover:border-brand-200 hover:bg-brand-50 active:scale-[0.99] sm:min-h-[68px] sm:p-4">
+                <span class="flex min-w-0 items-center gap-2 text-[12px] font-semibold leading-snug sm:text-[13px]">
                     <x-icon name="user-plus" class="size-4.5 shrink-0 text-brand-600" />
-                    Tambah balita
+                    <span class="min-w-0">Tambah balita</span>
                 </span>
-                <span class="mt-2 flex size-6 items-center justify-center rounded-full bg-brand-50 text-brand-600 sm:mt-0">
+                <span class="flex size-6 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-600">
                     <x-icon name="plus" class="size-3.5" />
                 </span>
             </a>
-            <a href="{{ route('kader.laporan.index') }}" class="group flex min-h-[68px] flex-col justify-between rounded-2xl border border-line bg-white p-3.5 text-ink shadow-card transition hover:border-brand-200 hover:bg-brand-50 active:scale-[0.99] sm:flex-row sm:items-center sm:p-4">
-                <span class="flex items-center gap-2 text-[12px] font-semibold sm:text-[13px]">
+            <a href="{{ route('kader.laporan.index') }}" class="group flex min-h-[60px] items-center justify-between gap-2 rounded-2xl border border-line bg-white p-3.5 text-ink shadow-card transition hover:border-brand-200 hover:bg-brand-50 active:scale-[0.99] sm:min-h-[68px] sm:p-4">
+                <span class="flex min-w-0 items-center gap-2 text-[12px] font-semibold leading-snug sm:text-[13px]">
                     <x-icon name="document" class="size-4.5 shrink-0 text-brand-600" />
-                    Lihat laporan
+                    <span class="min-w-0">Lihat laporan</span>
                 </span>
-                <span class="mt-2 flex size-6 items-center justify-center rounded-full bg-brand-50 text-brand-600 sm:mt-0">
+                <span class="flex size-6 shrink-0 items-center justify-center rounded-full bg-brand-50 text-brand-600">
                     <x-icon name="arrow-right" class="size-3.5" />
                 </span>
             </a>

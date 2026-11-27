@@ -88,7 +88,7 @@
                                 </span>
                             </div>
                         </div>
-                        <a href="{{ route('orang-tua.grafik', $selectedChild) }}" class="relative inline-flex items-center gap-1.5 rounded-xl bg-white/15 px-3 py-2 text-[11px] font-semibold text-white ring-1 ring-white/20 backdrop-blur transition hover:bg-white/25">
+                        <a href="{{ route('orang-tua.grafik', $selectedChild) }}" class="relative inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-white/15 px-3 py-2 text-[11px] font-semibold text-white ring-1 ring-white/20 backdrop-blur transition hover:bg-white/25 min-[360px]:w-auto">
                             Grafik
                             <x-icon name="arrow-right" class="size-3.5" />
                         </a>
@@ -107,7 +107,7 @@
                             </div>
                             <span class="badge badge-success"><span class="dot"></span>Tercatat</span>
                         </div>
-                        <div class="mt-3 grid grid-cols-3 gap-2.5">
+                        <div class="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-3">
                             <div class="rounded-xl bg-canvas-parent p-3">
                                 <p class="text-[9px] text-muted">Berat badan</p>
                                 <p class="mt-1 text-[20px] font-semibold leading-none text-ink tabular-nums">{{ $latestExamination->weight_kg }}<span class="ml-0.5 text-[10px] font-medium text-muted">kg</span></p>
@@ -116,7 +116,7 @@
                                 <p class="text-[9px] text-muted">Tinggi badan</p>
                                 <p class="mt-1 text-[20px] font-semibold leading-none text-ink tabular-nums">{{ $latestExamination->height_cm ?? '—' }}@if($latestExamination->height_cm)<span class="ml-0.5 text-[10px] font-medium text-muted">cm</span>@endif</p>
                             </div>
-                            <div class="rounded-xl bg-canvas-parent p-3">
+                            <div class="col-span-2 rounded-xl bg-canvas-parent p-3 sm:col-span-1">
                                 <p class="text-[9px] text-muted">Lingkar kepala</p>
                                 <p class="mt-1 text-[20px] font-semibold leading-none text-ink tabular-nums">{{ $latestExamination->head_circumference_cm ?? '—' }}@if($latestExamination->head_circumference_cm)<span class="ml-0.5 text-[10px] font-medium text-muted">cm</span>@endif</p>
                             </div>

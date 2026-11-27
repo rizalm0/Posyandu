@@ -61,7 +61,7 @@
         @endif
 
         <div class="mt-4 grid gap-4 xl:grid-cols-[minmax(0,1.35fr)_minmax(340px,0.65fr)]">
-            <div class="space-y-4">
+            <div class="min-w-0 space-y-4">
                 <section class="card overflow-hidden">
                     <div class="h-1.5 w-full bg-gradient-to-r from-brand-500 via-brand-400 to-brand-200"></div>
                     <div class="p-4 sm:p-5">
@@ -232,7 +232,7 @@
                 </section>
             </div>
 
-            <div class="space-y-4">
+            <div class="min-w-0 space-y-4">
                 <section class="card overflow-hidden">
                     <div class="flex items-start justify-between gap-3 border-b border-line px-4 py-4 sm:px-5">
                         <div>

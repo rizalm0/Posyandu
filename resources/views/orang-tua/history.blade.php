@@ -58,7 +58,7 @@
                             </span>
                         </div>
                         <div class="p-4 sm:p-5">
-                            <div class="grid grid-cols-3 gap-2.5">
+                            <div class="grid grid-cols-2 gap-2.5 min-[360px]:grid-cols-3">
                                 <div class="rounded-xl bg-canvas-parent p-3">
                                     <p class="text-[9px] text-muted">Berat badan</p>
                                     <p class="mt-1 text-[18px] font-semibold leading-none text-ink tabular-nums">{{ $examination->weight_kg }}<span class="ml-0.5 text-[9px] font-medium text-muted">kg</span></p>
@@ -67,7 +67,7 @@
                                     <p class="text-[9px] text-muted">Tinggi badan</p>
                                     <p class="mt-1 text-[18px] font-semibold leading-none text-ink tabular-nums">{{ $examination->height_cm ?? '—' }}@if($examination->height_cm)<span class="ml-0.5 text-[9px] font-medium text-muted">cm</span>@endif</p>
                                 </div>
-                                <div class="rounded-xl bg-canvas-parent p-3">
+                                <div class="col-span-2 rounded-xl bg-canvas-parent p-3 min-[360px]:col-span-1">
                                     <p class="text-[9px] text-muted">Lingkar kepala</p>
                                     <p class="mt-1 text-[18px] font-semibold leading-none text-ink tabular-nums">{{ $examination->head_circumference_cm ?? '—' }}@if($examination->head_circumference_cm)<span class="ml-0.5 text-[9px] font-medium text-muted">cm</span>@endif</p>
                                 </div>
