@@ -1,4 +1,4 @@
-# Posyandu Gegersuni
+# Posyandu Mobile
 
 A mobile-first Laravel application for Posyandu administration and parent access, built to match the supplied Hi-Fi design. Kader manage toddler records, examinations, immunizations, parent accounts, and monthly reports. Parents can view only the children explicitly linked and verified to their account.
 
